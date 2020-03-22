@@ -1,16 +1,13 @@
-# Folding@Home Dockerfile for Nvidia GPUs
+# Folding@Home for Petrobras Team
 
-Folding@home is a project focused on disease research.
-Right now, to the best of my knowledge, they are the
-only GPU-based distributed computing project who
-are running calculations against Coronavirus.
+Folding@Home is a project focused on disease research including the CORVID-19 (Coronavirus).
+Petrobras is helping the R&D by offering idle time of its own HPC environments to the Folding@Home project.
+This repo contains scripts to help deploy Folding@Home in different environments.
 
-Here is a combination of [Nikolay Yurin's Folding@home Dockerfile](https://github.com/yurinnick/folding-at-home-docker)
-and the [BOINC Nvidia Dockerfile](https://github.com/BOINC/boinc-client-docker),
-so that you have an additional layer of sandboxing around
-GPU computations of Folding@home. In case you are allowed
-to use other people's computers, or your employer's,
-using Docker containers might even be a requirement.
+## Acknowledgements
+
+Most of the scripts here are a combination of [wandhydrant  Folding@home GPU Dockerfile](https://github.com/wandhydrant/folding-at-home-docker-gpu), [Nikolay Yurin's Folding@home CPU Dockerfile](https://github.com/yurinnick/folding-at-home-docker)
+and the [BOINC Nvidia Dockerfile](https://github.com/BOINC/boinc-client-docker).
 
 ## Usage
 
@@ -23,6 +20,10 @@ Please inspect the Dockerfile and build the image yourself:
 ```
 cd <git-checkout>
 docker build -t my-fah-nvidia-image .
+```
+or simply
+```
+make build
 ```
 
 ### and run it:

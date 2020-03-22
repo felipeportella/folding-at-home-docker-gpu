@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.2-base-ubuntu18.04
 
-ARG version="v7.5"
+ARG fahversion="v7.5"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install PPA dependency
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # download and untar
     apt-get update -y && \
     apt-get install -y wget bzip2 && \
-    wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/${version}/latest.tar.bz2 -O /tmp/fahclient.tar.bz2 && \
+    wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/${fahversion}/latest.tar.bz2 -O /tmp/fahclient.tar.bz2 && \
     tar -xjf /tmp/fahclient.tar.bz2 -C /opt/fahclient --strip-components=1 && \
 # fix permissions
     chown -R folding:folding /opt/fahclient && \
@@ -34,10 +34,12 @@ COPY --chown=folding:folding entrypoint.sh /opt/fahclient
 RUN chmod +x /opt/fahclient/entrypoint.sh
 
 ENV USER "Anonymous"
-ENV TEAM "0"
-ENV ENABLE_GPU "true"
+ENV TEAM "247463"
+ENV ENABLE_GPU "false"
 ENV ENABLE_SMP "true"
-ENV POWER "full"
+#light, medium, full
+ENV POWER "light"
+
 
 USER folding
 WORKDIR /opt/fahclient

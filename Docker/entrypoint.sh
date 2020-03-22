@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+echo "GPU: ${ENABLE_GPU}"
+
 /opt/fahclient/FAHClient \
     --user="${USER}" \
     --team="${TEAM}" \
