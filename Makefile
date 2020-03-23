@@ -35,9 +35,9 @@ dockerfile2singulatiry: ## convert the Dockerfile to Singularity
 	echo "TODO: remove comments from Singularity file. They are unsupported when running multiline command!"
 	sed -i "s/#.*//g" Singularity
 
-singularity-build: ## build the singularity image
+singularity-build: build ## build the singularity image
 	cd build
-	sudo singularity build $(APP_NAME).simg Singularity
+	sudo singularity build $(APP_NAME).simg docker-daemon://local/$(APP_NAME)
 
 singularity-run-cpu: ## run  F@H singularity image only with CPU support
 	SINGULARITYENV_ENABLE_GPU=false singularity run build/$(APP_NAME).simg
