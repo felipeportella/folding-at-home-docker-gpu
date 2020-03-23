@@ -41,7 +41,7 @@ ENV TEAM "247463"
 ENV ENABLE_GPU "false"
 ENV ENABLE_SMP "true"
 #light, medium, full
-ENV POWER "light"
+ENV POWER "full"
 
 
 USER folding

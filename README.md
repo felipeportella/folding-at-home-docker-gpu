@@ -11,7 +11,17 @@ and the [BOINC Nvidia Dockerfile](https://github.com/BOINC/boinc-client-docker).
 
 ## Usage
 
-### Build the image locally
+### Singularity
+
+```bash
+make singularity-build
+```
+
+This command does it all (build the docker and then the singularity container).
+
+#### Other
+
+### Build docker the image locally
 
 I did not set up anything pre-built on the Docker hub.
 
