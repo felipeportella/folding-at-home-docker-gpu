@@ -1,0 +1,50 @@
+Bootstrap: docker
+From: nvidia/cuda:10.2-base-ubuntu18.04
+%files
+entrypoint.sh /tmp/entrypoint.sh
+%post
+
+#ARG fahversion="v7.5"
+# hardcoding the version as ARG is not supported by Singularity
+
+apt-get update && apt-get install -y --no-install-recommends software-properties-common tzdata
+useradd --system folding
+mkdir -p /opt/fahclient
+cp /tmp/entrypoint.sh /opt/fahclient/entrypoint.sh
+apt-get update -y
+apt-get install -y wget bzip2
+wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/latest.tar.bz2 -O /tmp/fahclient.tar.bz2
+tar -xjf /tmp/fahclient.tar.bz2 -C /opt/fahclient --strip-components=1
+chown -R folding:folding /opt/fahclient
+rm -rf /tmp/fahclient.tar.bz2
+add-apt-repository -y ppa:graphics-drivers
+apt-get update && apt-get install -y --install-recommends nvidia-opencl-dev
+apt-get remove -y software-properties-common
+apt-get autoremove -y
+apt-get clean autoclean
+rm -rf /var/lib/apt/lists/*
+
+chown folding:folding /opt/fahclient/entrypoint.sh
+
+chmod +x /opt/fahclient/entrypoint.sh
+
+#USER folding
+cd /opt/fahclient
+
+# EXPOSE 7396
+# EXPOSE 36330
+
+
+
+%environment
+export USER="Anonymous"
+export TEAM="247463"
+export ENABLE_GPU="false"
+export ENABLE_SMP="true"
+export POWER="light"
+%runscript
+cd /opt/fahclient
+exec /opt/fahclient/entrypoint.sh "$@"
+%startscript
+cd /opt/fahclient
+exec /opt/fahclient/entrypoint.sh "$@"

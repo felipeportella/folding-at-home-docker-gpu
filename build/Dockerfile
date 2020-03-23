@@ -1,6 +1,7 @@
 FROM nvidia/cuda:10.2-base-ubuntu18.04
 
-ARG fahversion="v7.5"
+#ARG fahversion="v7.5"
+# hardcoding the version as ARG is not supported by Singularity
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install PPA dependency
@@ -13,7 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # download and untar
     apt-get update -y && \
     apt-get install -y wget bzip2 && \
-    wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/${fahversion}/latest.tar.bz2 -O /tmp/fahclient.tar.bz2 && \
+    #wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/${fahversion}/latest.tar.bz2 -O /tmp/fahclient.tar.bz2 && \
+    wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/latest.tar.bz2 -O /tmp/fahclient.tar.bz2 && \
     tar -xjf /tmp/fahclient.tar.bz2 -C /opt/fahclient --strip-components=1 && \
 # fix permissions
     chown -R folding:folding /opt/fahclient && \
@@ -29,7 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean autoclean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --chown=folding:folding entrypoint.sh /opt/fahclient
+COPY entrypoint.sh /opt/fahclient
+RUN chown folding:folding /opt/fahclient/entrypoint.sh
 
 RUN chmod +x /opt/fahclient/entrypoint.sh
 

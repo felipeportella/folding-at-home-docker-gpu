@@ -7,7 +7,7 @@ This repo contains scripts to help deploy Folding@Home in different environments
 ## Acknowledgements
 
 Most of the scripts here are a combination of [wandhydrant  Folding@home GPU Dockerfile](https://github.com/wandhydrant/folding-at-home-docker-gpu), [Nikolay Yurin's Folding@home CPU Dockerfile](https://github.com/yurinnick/folding-at-home-docker)
-and the [BOINC Nvidia Dockerfile](https://github.com/BOINC/boinc-client-docker).
+and the [BOINC Nvidia Dockerfile](https://github.com/BOINC/boinc-client-docker). Also <https://github.com/stefancrain/folding-at-home>
 
 ## Usage
 
