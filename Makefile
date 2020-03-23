@@ -22,7 +22,7 @@ docker-run-cpu: ## run F@H docker image only with CPU support
 	docker run  -e ENABLE_GPU=false --name="${APP_NAME}" "${APP_NAME}"
 
 docker-run-gpu: ## run F@H docker image with GPU support
-	docker run -e ENABLE_GPU=true --name="${APP_NAME}" "${APP_NAME}"
+	docker run --gpus all -e ENABLE_GPU=true --name="${APP_NAME}" "${APP_NAME}"
 
 stop: ## stop and remove the running container
 	docker stop "$(APP_NAME)"; docker rm "$(APP_NAME)"
@@ -39,4 +39,4 @@ singularity-run-cpu: ## run F@H singularity image only with CPU support
 	SINGULARITYENV_ENABLE_GPU=false singularity run ./build/$(APP_NAME).simg
 
 singularity-run-gpu: ## run F@H singularity image with GPU support
-	SINGULARITYENV_ENABLE_GPU=true singularity run ./build/$(APP_NAME).simg
+	SINGULARITYENV_ENABLE_GPU=true singularity run --nv ./build/$(APP_NAME).simg
