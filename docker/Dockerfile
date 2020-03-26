@@ -1,5 +1,7 @@
 FROM nvidia/cuda:10.2-base-ubuntu18.04
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 #ARG fahversion="v7.5"
 # hardcoding the version as ARG is not supported by Singularity
 
